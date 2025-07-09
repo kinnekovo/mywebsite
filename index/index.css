@@ -1,3 +1,11 @@
+/* 重置默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*导航栏*/
 .navbar {
   background: #333;
   padding: 0 40px;
@@ -17,8 +25,9 @@
   color: #ffd700;
 }
 
+/*横幅*/
 .banner {
-  background: url('你的大图路径.jpg') center center/cover no-repeat;
+  background: url('../image/zhixiayang.png') center center/cover no-repeat;
   height: 400px;
   display: flex;
   align-items: center;
@@ -38,6 +47,7 @@
   font-size: 22px;
 }
 
+/*功能展示区*/
 .features {
   display: flex;
   justify-content: center;
@@ -71,6 +81,7 @@
   font-size: 16px;
 }
 
+/*页脚*/
 footer {
   background: #eee;
   color: #333;
