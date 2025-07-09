@@ -1,0 +1,81 @@
+.navbar {
+  background: #333;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 32px;
+  font-size: 20px;
+  line-height: 56px;
+  transition: color 0.2s;
+}
+.navbar a:hover {
+  color: #ffd700;
+}
+
+.banner {
+  background: url('你的大图路径.jpg') center center/cover no-repeat;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.banner-content {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.banner h1 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.banner p {
+  font-size: 22px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 40px 0;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  width: 260px;
+  padding: 24px 16px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.card p {
+  color: #666;
+  font-size: 16px;
+}
+
+footer {
+  background: #eee;
+  color: #333;
+  text-align: center;
+  padding: 24px 0 16px 0;
+  font-size: 15px;
+  margin-top: 40px;
+}
