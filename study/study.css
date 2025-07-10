@@ -1,0 +1,283 @@
+/* 重置默认样式 */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* 导航栏样式 */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* 确保在最上层 */
+  transition: all 0.3s ease;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #111;
+}
+
+nav li a:active {
+  background-color: hsl(45, 74%, 52%);
+}
+
+/* 全局音量控制 */
+.global-sound-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 101; /* 比导航栏高一级 */
+  transition: all 0.3s ease;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    z-index: 1;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.timer {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.time-display {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.time-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.time-inputs input {
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ffc038;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e09900;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.sound-toggle {
+    display: none; /* 隐藏原来的音量按钮 */
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.image-option {
+    border: 2px solid transparent;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image-option.selected {
+    border-color: #4CAF50;
+}
+
+.image-option img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
+
+.notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.notification-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.notification h2 {
+    margin-top: 0;
+}
+
+.notification button {
+    margin-top: 20px;
+}
+
+/* 专注模式样式 */
+body.focus-mode .time-inputs,
+body.focus-mode #mainTitle,
+body.focus-mode #settingsPanel,
+body.focus-mode nav { /* 专注模式下隐藏导航栏 */
+    display: none;
+}
+
+body.focus-mode .container {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+body.focus-mode .time-display {
+    font-size: clamp(3rem, 15vw, 7rem);
+    color: white;
+    
+    /* 添加半透明背景 */
+    background-color: rgba(255, 255, 255, 0.2);  /* 半透明白色 */
+    backdrop-filter: blur(5px);  /* 毛玻璃效果 */
+    border-radius: 15px;  /* 圆角 */
+    padding: 10px 30px;  /* 内边距 */
+    display: inline-block;  /* 确保背景只覆盖内容区域 */
+}
+
+body.focus-mode .buttons {
+    margin-top: 50px;
+}
+
+body.focus-mode button {
+    /* 添加半透明背景 */
+    background-color: rgba(255, 255, 255, 0.2);  /* 半透明白色 */
+    backdrop-filter: blur(5px);  /* 毛玻璃效果 */
+    border-radius: 15px;  /* 圆角 */
+    padding: 10px 30px;  /* 内边距 */
+    display: inline-block;  /* 确保背景只覆盖内容区域 */
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+body.focus-mode .global-sound-toggle {
+    top: 30px; /* 专注模式下调整位置 */
+    right: 30px;
+    transform: scale(1.2);
+}
+
+/* 页脚 */
+.footer {
+  width: 100%;
+  z-index: 1;
+  padding: 10px;
+  text-align: center;
+  background: #dddddd;
+  color: #333;
+  margin-top: 0px;
+  line-height: 0.8;
+  box-sizing: border-box;
+  font-family: "微软雅黑", sans-serif;
+}
+
+body.focus-mode .footer {
+  display: none;       /* 专注模式下隐藏页脚 */
+}
