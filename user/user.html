@@ -1,45 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>个人中心</title>
-    <link rel="stylesheet" href="user.css">
+  <meta charset="UTF-8">
+  <title>个人中心</title>
+  <link rel="stylesheet" href="user.css">
 </head>
 <body>
-    <div class="user-center">
-        <h2>个人中心</h2>
-        <label>账号：<input type="text" id="ucAccount" disabled></label>
-        <label>密码：<input type="password" id="ucPassword"></label>
-        <label>昵称：<input type="text" id="ucNickname"></label>
-        <label>生日：<input type="date" id="ucBirthday"></label>
-        <button id="saveProfile">保存信息</button>
-        <button id="logoutBtn" style="background:#e74c3c;">退出登录</button>
-        <button id="dismissBtn" style="background:#e74c3c;">注销账号</button>
-
-        <!-- 登录弹窗 -->
-        <div class="login-modal" id="loginModal">
-            <div class="login-content">
-                <h2>账号登录</h2>
-                <input type="text" id="loginAccount" placeholder="账号">
-                <input type="password" id="loginPassword" placeholder="密码">
-                <button id="loginBtn">登录</button>
-                <button id="showRegisterBtn" style="background:#4CAF50;">注册</button>
-            </div>
-        </div>
-        <!-- 注册弹窗 -->
-        <div class="login-modal" id="registerModal" style="display:none;">
-            <div class="login-content">
-                <h2>账号注册</h2>
-                <input type="text" id="regAccount" placeholder="账号">
-                <input type="password" id="regPassword" placeholder="密码">
-                <input type="text" id="regNickname" placeholder="昵称">
-                <input type="date" id="regBirthday" placeholder="生日">
-                <button id="doRegisterBtn">注册</button>
-                <button id="cancelRegisterBtn" style="background:#aaa;">取消</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="user.js"></script>
+  <div class="user-center">
+    <h2>个人中心</h2>
+    <label>账号：<input type="text" id="ucAccount" disabled></label>
+    <label>密码：<input type="password" id="ucPassword"></label>
+    <label>昵称：<input type="text" id="ucNickname"></label>
+    <label>生日：<input type="date" id="ucBirthday"></label>
+    <button id="saveProfile">保存信息</button>
+    <button id="logoutBtn" style="background:#e74c3c;">退出登录</button>
+  </div>
+  <script src="user.js"></script>
 </body>
 </html>

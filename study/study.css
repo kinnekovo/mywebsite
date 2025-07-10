@@ -42,6 +42,20 @@ nav li a:active {
   background-color: hsl(45, 74%, 52%);
 }
 
+/* 非专注模式下显示当前账号 */
+#currentAccount {
+    position: absolute;
+    top: 15px;
+    right: 60px;
+    color: white;
+    z-index: 101;
+}
+
+/* 专注模式下隐藏当前账号 */
+body.focus-mode #currentAccount {
+    display: none;
+}
+
 /* 全局音量控制 */
 .global-sound-toggle {
   position: fixed;

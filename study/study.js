@@ -18,6 +18,7 @@ const controlButtons = document.getElementById('controlButtons');
 const body = document.body;
 const container = document.querySelector('.container');
 const mainNav = document.getElementById('mainNav');
+const currentAccountSpan = document.getElementById('currentAccount');
 const statsChartCanvas = document.getElementById('statsChart');
 
 let totalSeconds = 0;
@@ -27,26 +28,14 @@ let soundEnabled = true;
 let isPaused = false;
 let chart = null;
 
-// 去掉账号管理相关代码
-// let currentAccount = localStorage.getItem('focus_current_account') || '默认账号';
+// 账号管理
+let currentAccount = localStorage.getItem('focus_current_account') || '默认账号';
 
-// 去掉账号切换相关函数和事件监听
-// function switchAccount() {
-//     const acc = accountInput.value.trim();
-//     if (acc) {
-//         currentAccount = acc;
-//         localStorage.setItem('focus_current_account', currentAccount);
-//         renderCurrentAccount();
-//         renderFocusStats();
-//     }
-// }
-// function renderCurrentAccount() {
-//     currentAccountSpan.textContent = `当前账号：${currentAccount}`;
-//     accountInput.value = '';
-// }
-// switchAccountBtn.addEventListener('click', switchAccount);
-// accountInput.addEventListener('keydown', e => { if (e.key === 'Enter') switchAccount(); });
-// renderCurrentAccount();
+// 渲染当前账号
+function renderCurrentAccount() {
+    currentAccountSpan.textContent = `当前账号：${currentAccount}`;
+}
+renderCurrentAccount();
 
 // 更新时间显示
 function updateDisplay() {
@@ -190,20 +179,20 @@ document.querySelectorAll('.image-option').forEach(option => {
 // 初始化
 updateDisplay();
 
-// 统计专注时长（去掉账号隔离相关代码）
-// function getStatsKey() {
-//     return `focusStats_${currentAccount}`;
-// }
+// 统计专注时长（账号隔离）
+function getStatsKey() {
+    return `focusStats_${currentAccount}`;
+}
 function saveFocusSession(seconds) {
     const today = new Date().toISOString().slice(0,10);
-    let stats = JSON.parse(localStorage.getItem('focusStats') || '{}');
+    let stats = JSON.parse(localStorage.getItem(getStatsKey()) || '{}');
     stats[today] = (stats[today] || 0) + seconds;
-    localStorage.setItem('focusStats', JSON.stringify(stats));
+    localStorage.setItem(getStatsKey(), JSON.stringify(stats));
 }
 
 // 渲染统计（柱状图）
 function renderFocusStats() {
-    let stats = JSON.parse(localStorage.getItem('focusStats') || '{}');
+    let stats = JSON.parse(localStorage.getItem(getStatsKey()) || '{}');
     let labels = [];
     let data = [];
     for(let i=6;i>=0;i--) {
@@ -284,8 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('账号或密码错误');
                 return;
             }
-            // 去掉账号切换相关代码
-            // localStorage.setItem('focus_current_account', account);
+            localStorage.setItem('focus_current_account', account);
             // 设置登录状态标记为 true
             localStorage.setItem('is_logged_in', 'true');
             document.body.classList.remove('login-active');
