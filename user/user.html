@@ -14,6 +14,7 @@
     <label>生日：<input type="date" id="ucBirthday"></label>
     <button id="saveProfile">保存信息</button>
     <button id="logoutBtn" style="background:#e74c3c;">退出登录</button>
+    <button id="dismissBtn" style="background:#e74c3c;">注销账号</button>
   </div>
   <script>
     // 读取用户信息
@@ -44,6 +45,13 @@
       localStorage.setItem('is_logged_in', 'false');
       location.href = '../study/study.html';
     };
+
+    document.getElementById('dismissBtn').onclick = function() {
+      localStorage.removeItem('user_profile');
+      localStorage.removeItem('focus_current_account');
+      localStorage.setItem('is_logged_in', 'false');
+      location.href = '../study/study.html';
+    };    
   </script>
   <style>
     .user-center { max-width: 350px; margin: 60px auto; background: #fff; border-radius: 10px; box-shadow: 0 0 10px #3333; padding: 30px 40px; display: flex; flex-direction: column; gap: 18px;}
