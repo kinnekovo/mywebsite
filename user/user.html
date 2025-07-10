@@ -1,64 +1,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>个人中心</title>
-  <link rel="stylesheet" href="user.css">
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="user.css">
 </head>
 <body>
-  <div class="user-center">
-    <h2>个人中心</h2>
-    <label>账号：<input type="text" id="ucAccount" disabled></label>
-    <label>密码：<input type="password" id="ucPassword"></label>
-    <label>昵称：<input type="text" id="ucNickname"></label>
-    <label>生日：<input type="date" id="ucBirthday"></label>
-    <button id="saveProfile">保存信息</button>
-    <button id="logoutBtn" style="background:#e74c3c;">退出登录</button>
-    <button id="dismissBtn" style="background:#e74c3c;">注销账号</button>
-  </div>
-  <script>
-    // 读取用户信息
-    let currentAccount = localStorage.getItem('focus_current_account');
-    let users = JSON.parse(localStorage.getItem('user_profiles') || '[]');
-    let user = users.find(user => user.account === currentAccount);
+    <div class="user-center">
+        <h2>个人中心</h2>
+        <label>账号：<input type="text" id="ucAccount" disabled></label>
+        <label>密码：<input type="password" id="ucPassword"></label>
+        <label>昵称：<input type="text" id="ucNickname"></label>
+        <label>生日：<input type="date" id="ucBirthday"></label>
+        <button id="saveProfile">保存信息</button>
+        <button id="logoutBtn" style="background:#e74c3c;">退出登录</button>
+        <button id="dismissBtn" style="background:#e74c3c;">注销账号</button>
 
-    if (user) {
-      document.getElementById('ucAccount').value = user.account || '';
-      document.getElementById('ucPassword').value = user.password || '';
-      document.getElementById('ucNickname').value = user.nickname || '';
-      document.getElementById('ucBirthday').value = user.birthday || '';
-    }
+        <!-- 登录弹窗 -->
+        <div class="login-modal" id="loginModal">
+            <div class="login-content">
+                <h2>账号登录</h2>
+                <input type="text" id="loginAccount" placeholder="账号">
+                <input type="password" id="loginPassword" placeholder="密码">
+                <button id="loginBtn">登录</button>
+                <button id="showRegisterBtn" style="background:#4CAF50;">注册</button>
+            </div>
+        </div>
+        <!-- 注册弹窗 -->
+        <div class="login-modal" id="registerModal" style="display:none;">
+            <div class="login-content">
+                <h2>账号注册</h2>
+                <input type="text" id="regAccount" placeholder="账号">
+                <input type="password" id="regPassword" placeholder="密码">
+                <input type="text" id="regNickname" placeholder="昵称">
+                <input type="date" id="regBirthday" placeholder="生日">
+                <button id="doRegisterBtn">注册</button>
+                <button id="cancelRegisterBtn" style="background:#aaa;">取消</button>
+            </div>
+        </div>
+    </div>
 
-    document.getElementById('saveProfile').onclick = function() {
-      if (user) {
-        user.password = document.getElementById('ucPassword').value;
-        user.nickname = document.getElementById('ucNickname').value;
-        user.birthday = document.getElementById('ucBirthday').value;
-        let updatedUsers = users.map(u => u.account === currentAccount ? user : u);
-        localStorage.setItem('user_profiles', JSON.stringify(updatedUsers));
-        alert('保存成功！');
-      }
-    };
-
-    document.getElementById('logoutBtn').onclick = function() {
-      // 设置登录状态标记为 false
-      localStorage.setItem('is_logged_in', 'false');
-      location.href = '../study/study.html';
-    };
-
-    document.getElementById('dismissBtn').onclick = function() {
-      localStorage.removeItem('user_profile');
-      localStorage.removeItem('focus_current_account');
-      localStorage.setItem('is_logged_in', 'false');
-      location.href = '../study/study.html';
-    };    
-  </script>
-  <style>
-    .user-center { max-width: 350px; margin: 60px auto; background: #fff; border-radius: 10px; box-shadow: 0 0 10px #3333; padding: 30px 40px; display: flex; flex-direction: column; gap: 18px;}
-    .user-center label { display: flex; flex-direction: column; font-size: 16px; color: #333;}
-    .user-center input { padding: 8px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-top: 4px;}
-    .user-center button { padding: 10px; font-size: 16px; border-radius: 5px; background: #ffc038; color: #fff; border: none; cursor: pointer;}
-    .user-center button:hover { background: #e09900;}
-  </style>
+    <script src="user.js"></script>
 </body>
 </html>

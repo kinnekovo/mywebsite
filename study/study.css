@@ -42,39 +42,6 @@ nav li a:active {
   background-color: hsl(45, 74%, 52%);
 }
 
-/* 账号切换面板 */
-.account-panel {
-  margin: 70px auto 0 auto;
-  max-width: 600px;
-  background: rgba(255,255,255,0.95);
-  border-radius: 8px;
-  padding: 10px 18px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-}
-.account-panel input {
-  width: 120px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-.account-panel button {
-  padding: 4px 12px;
-  font-size: 15px;
-  border-radius: 4px;
-  border: none;
-  background: #ffc038;
-  color: #fff;
-  cursor: pointer;
-}
-.account-panel #currentAccount {
-  margin-left: 10px;
-  color: #888;
-}
-
 /* 全局音量控制 */
 .global-sound-toggle {
   position: fixed;
