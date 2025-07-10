@@ -5,80 +5,145 @@
     box-sizing: border-box;
 }
 
-/*导航栏*/
-.navbar {
-  background: #333;
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  height: 56px;
+body {
+    font-family: "微软雅黑", sans-serif;
+    line-height: 1.6;
 }
-.navbar a {
-  color: #fff;
+
+/* 导航栏 */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
-  margin-right: 32px;
-  font-size: 20px;
-  line-height: 56px;
-  transition: color 0.2s;
-}
-.navbar a:hover {
-  color: #ffd700;
 }
 
-/*横幅*/
-.banner {
-  background: url('../image/zhixiayang.png') center center/cover no-repeat;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.banner-content {
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-.banner h1 {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-.banner p {
-  font-size: 22px;
+li a:hover {
+  background-color: #111;
 }
 
-/*功能展示区*/
-.features {
+li a:active {
+  background-color: hsl(45, 74%, 52%);
+}
+
+/* 首页大图 */
+.frontimage {
+    height: 100vh; /* 大图高度为屏幕的80% */
+    background-image: url('../image/zhixiayang.png'); /* 替换为你的首页图 */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.header h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.header p {
+    font-size: 24px;
+}
+
+/* 文字内容区 */
+.content {
+    padding: 60px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* 卡片容器样式，实现水平排列和居中 */
+.card-container {
   display: flex;
   justify-content: center;
-  gap: 32px;
-  margin: 40px 0;
+  gap: 30px; /* 卡片之间的间距 */
+  flex-wrap: wrap; /* 屏幕变窄时自动换行 */
+  padding: 30px 0;
 }
+
+/* 单个卡片样式 */
 .card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  width: 260px;
-  padding: 24px 16px;
+  width: 220px; /* 卡片宽度，可根据需求调整 */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* 卡片悬浮效果，提升交互感 */
 .card:hover {
-  transform: translateY(-8px) scale(1.03);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-.card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-bottom: 16px;
+
+/* 卡片图片容器样式 */
+.card-img {
+  width: 100%;
+  height: 200px; /* 固定图片容器高度，让图片展示更整齐 */
+  overflow: hidden;
 }
-.card h2 {
-  font-size: 24px;
-  margin-bottom: 8px;
+
+/* 卡片图片样式，保持比例并覆盖容器 */
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保持图片比例，裁剪多余部分 */
 }
-.card p {
-  color: #666;
-  font-size: 16px;
+
+/* 卡片标题样式 */
+.card-title {
+  font-size: 22px;
+  margin: 15px 0 10px;
+  color: #333;
+}
+
+/* 描述文字通用样式，控制行高和间距等 */
+.card-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #999;
+  padding: 0 10px;
+  margin-bottom: 10px;
 }
 
 /*页脚*/

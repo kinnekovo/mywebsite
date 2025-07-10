@@ -1,51 +1,77 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夏大侦探的个人网站</title>
     <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
-    <nav class="navbar">
-        <a href="#">首页</a>
-        <a href="#">心动档案</a>
-        <a href="#">拾光凝意</a>
-        <a href="#">迷抵少时</a>
-        <a href="#">斑斓光影</a>
-        <a href="#">蜜秘</a>
-    </nav>
+    <!-- 导航栏 -->
+    <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="info.html">心动档案</a></li>
+        <li><a href="study.html">拾光凝意</a></li>
+        <li><a href="#">迷抵少时</a></li>
+        <li><a href="album.html">斑斓光影</a></li>
+        <li><a href="#">蜜秘</a></li>
+    </ul>
 
-    <header class="banner">
-        <div class="banner-content">
+    <!-- 首页大图 -->
+    <div class="frontimage">
+        <div class="header">
             <h1>欢迎来到夏彦的个人网站！</h1>
             <p>—— 与你重逢后的日子，每一天都值得纪念 ——</p>
         </div>
-    </header>
+    </div>
 
-    <section class="features">
-      <div class="card">
-        <img src="../image/loading.jpg" alt="心动档案">
-        <h2>心动档案</h2>
-        <p>有关夏彦的一些信息</p>
-      </div>
-      <div class="card">
-        <img src="../image/loading.jpg" alt="拾光凝意">
-        <h2>拾光凝意</h2>
-        <p>和夏彦一起专注学习吧！</p>
-      </div>
-      <div class="card">
-        <img src="../image/loading.jpg" alt="拾光凝意">
-        <h2>迷抵少时</h2>
-        <p>和夏彦一起玩小游戏吧！</p>
-      </div>
-      <div class="card">
-        <img src="../image/loading.jpg" alt="拾光凝意">
-        <h2>蜜秘</h2>
-        <p>请为网站的建设提出你宝贵的建议</p>
-      </div>
-    </section>
+    <!-- 文字内容区域 -->
+    <div class="content">
+        <h2>角色介绍</h2>
+        <p>夏彦是《未定事件簿》中的男主角之一，是女主角的青梅竹马，也是一名天才少年。他性格开朗，阳光热情，擅长推理和解决各种难题。</p>
+        <p>虽然外表看似不羁，但内心却非常细腻，对女主角有着深厚的感情。在经历了多年的分别后，夏彦以律师的身份回到了女主角的身边，两人一起卷入了一系列离奇的案件中...</p>
+    </div>
 
-    <footer>
-        © 2025 夏彦个站 | 素材来源《未定事件簿》官方<br>
-        本网站仅用于粉丝交流，请勿用于商业用途
-    </footer>
+    <div class="card-container">
+        <!-- 第一个卡片 -->
+        <div class="card">
+            <div class="card-img">
+                <img src="../image/loading.jpg" alt="心动档案"> 
+            </div>
+            <h2 class="card-title">心动档案</h2>
+            <p class="card-desc">有关夏彦的一些信息</p>
+        </div>
+        <!-- 第二个卡片 -->
+        <div class="card">
+            <div class="card-img">
+                <img src="../image/loading.jpg" alt="拾光凝意">
+            </div>
+            <h2 class="card-title">拾光凝意</h2>
+            <p class="card-desc cn-desc">和夏彦一起专注学习吧！</p>
+        </div>
+        <!-- 第三个卡片 -->
+        <div class="card">
+            <div class="card-img">
+                <img src="../image/loading.jpg" alt="卡片图片3"> 
+            </div>
+            <h2 class="card-title">迷抵少时</h2>
+            <p class="card-desc cn-desc">和夏彦一起玩小游戏吧！</p>
+        </div>
+        <!-- 第四个卡片 -->
+        <div class="card">
+            <div class="card-img">
+                <img src="../image/loading.jpg" alt="卡片图片4">
+            </div>
+            <h2 class="card-title">蜜秘</h2>
+            <p class="card-desc">为我们网站的建设提出宝贵的意见</p>
+        </div>
+    </div>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <p>© 2025 夏彦档案库 | 素材来源《未定事件簿》官方</p>
+    <p>本网站仅用于粉丝交流，请勿用于商业用途</p>
+</footer>
+
 </body>
+</html>
