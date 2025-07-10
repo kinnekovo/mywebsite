@@ -6,6 +6,7 @@
     <title>拾光凝意</title>
     <link rel="stylesheet" href="study.css">
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body id="appBody" style="background-image: url('../image/qiandeng.png')">
     <!-- 导航栏 -->
@@ -20,6 +21,14 @@
         </ul>
     </nav>
     
+    <!-- 账号切换 -->
+    <div class="account-panel">
+        <label for="accountInput">账号：</label>
+        <input type="text" id="accountInput" placeholder="输入账号名" />
+        <button id="switchAccountBtn">切换账号</button>
+        <span id="currentAccount"></span>
+    </div>
+
     <!-- 全局音量控制 -->
     <div class="global-sound-toggle" id="globalSoundToggle">
         <i class="fa fa-volume-up"></i>
@@ -69,6 +78,12 @@
                 </div>
             </div>
         </div>
+
+        <!-- 专注统计图表 -->
+        <div class="focus-stats" id="focusStats">
+            <h3>本周专注统计</h3>
+            <canvas id="statsChart" height="180"></canvas>
+        </div>
     </div>
     
     <div class="notification" id="notification">
@@ -86,11 +101,35 @@
 
     <script src="study.js"></script>
 
-<!-- 页脚 -->
-<footer class="footer">
-    <p>© 2025 夏彦档案库 | 素材来源《未定事件簿》官方</p>
-    <p>本网站仅用于粉丝交流，请勿用于商业用途</p>
-</footer>
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>© 2025 夏彦档案库 | 素材来源《未定事件簿》官方</p>
+        <p>本网站仅用于粉丝交流，请勿用于商业用途</p>
+    </footer>
 
+
+    <!-- 登录弹窗 -->
+    <div class="login-modal" id="loginModal">
+      <div class="login-content">
+        <h2>账号登录</h2>
+        <input type="text" id="loginAccount" placeholder="账号">
+        <input type="password" id="loginPassword" placeholder="密码">
+        <button id="loginBtn">登录</button>
+        <button id="showRegisterBtn" style="background:#4CAF50;">注册</button>
+      </div>
+    </div>
+    <!-- 注册弹窗 -->
+    <div class="login-modal" id="registerModal" style="display:none;">
+      <div class="login-content">
+        <h2>账号注册</h2>
+        <input type="text" id="regAccount" placeholder="账号">
+        <input type="password" id="regPassword" placeholder="密码">
+        <input type="text" id="regNickname" placeholder="昵称">
+        <input type="date" id="regBirthday" placeholder="生日">
+        <button id="doRegisterBtn">注册</button>
+        <button id="cancelRegisterBtn" style="background:#aaa;">取消</button>
+      </div>
+    </div>
+</div>
 </body>
 </html>

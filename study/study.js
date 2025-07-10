@@ -9,7 +9,7 @@ const backgroundGallery = document.getElementById('backgroundGallery');
 const notification = document.getElementById('notification');
 const closeNotification = document.getElementById('closeNotification');
 const appBody = document.getElementById('appBody');
-const globalSoundToggle = document.getElementById('globalSoundToggle'); // 新的全局音量按钮
+const globalSoundToggle = document.getElementById('globalSoundToggle');
 const backgroundSound = document.getElementById('backgroundSound');
 const mainTitle = document.getElementById('mainTitle');
 const timeInputs = document.getElementById('timeInputs');
@@ -17,22 +17,45 @@ const settingsPanel = document.getElementById('settingsPanel');
 const controlButtons = document.getElementById('controlButtons');
 const body = document.body;
 const container = document.querySelector('.container');
-const mainNav = document.getElementById('mainNav'); // 导航栏
+const mainNav = document.getElementById('mainNav');
+const accountInput = document.getElementById('accountInput');
+const switchAccountBtn = document.getElementById('switchAccountBtn');
+const currentAccountSpan = document.getElementById('currentAccount');
+const statsChartCanvas = document.getElementById('statsChart');
 
-// 变量
 let totalSeconds = 0;
 let remainingSeconds = 0;
 let countdownInterval;
 let soundEnabled = true;
 let isPaused = false;
+let chart = null;
+
+// 账号管理
+let currentAccount = localStorage.getItem('focus_current_account') || '默认账号';
+
+// 账号切换
+function switchAccount() {
+    const acc = accountInput.value.trim();
+    if (acc) {
+        currentAccount = acc;
+        localStorage.setItem('focus_current_account', currentAccount);
+        renderCurrentAccount();
+        renderFocusStats();
+    }
+}
+function renderCurrentAccount() {
+    currentAccountSpan.textContent = `当前账号：${currentAccount}`;
+    accountInput.value = '';
+}
+switchAccountBtn.addEventListener('click', switchAccount);
+accountInput.addEventListener('keydown', e => { if (e.key === 'Enter') switchAccount(); });
+renderCurrentAccount();
 
 // 更新时间显示
 function updateDisplay() {
     const minutes = Math.floor(remainingSeconds / 60);
     const seconds = remainingSeconds % 60;
     timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
-    // 最后10秒变红
     if (remainingSeconds <= 10) {
         timeDisplay.style.color = '#e74c3c';
     } else {
@@ -54,40 +77,24 @@ function exitFocusMode() {
 // 开始/继续倒计时
 function startCountdown() {
     if (!isPaused) {
-        // 新开始
         const minutes = parseInt(minutesInput.value) || 0;
         const seconds = parseInt(secondsInput.value) || 0;
-        
         if (minutes === 0 && seconds === 0) {
             alert('请设置有效时间');
             return;
         }
-        
         totalSeconds = minutes * 60 + seconds;
         remainingSeconds = totalSeconds;
         updateDisplay();
-        
-        // 进入专注模式
         enterFocusMode();
-        
-        // 禁用输入
         minutesInput.disabled = true;
         secondsInput.disabled = true;
     } else {
-        // 从暂停恢复
         isPaused = false;
     }
-    
-    // 切换按钮显示
     startBtn.style.display = 'none';
     pauseBtn.style.display = 'inline-block';
-    
-    // 开始播放背景音
-    if (soundEnabled) {
-        playBackgroundSound();
-    }
-    
-    // 开始计时
+    if (soundEnabled) playBackgroundSound();
     countdownInterval = setInterval(() => {
         if (remainingSeconds <= 0) {
             clearInterval(countdownInterval);
@@ -107,11 +114,7 @@ function pauseCountdown() {
     startBtn.style.display = 'inline-block';
     startBtn.textContent = '继续';
     pauseBtn.style.display = 'none';
-    
-    // 暂停背景音
     stopBackgroundSound();
-    
-    // 标记为已暂停
     isPaused = true;
 }
 
@@ -123,23 +126,17 @@ function resetCountdown() {
     startBtn.style.display = 'inline-block';
     startBtn.textContent = '开始专注';
     pauseBtn.style.display = 'none';
-    
-    // 重置时间显示
     remainingSeconds = totalSeconds;
     updateDisplay();
-    
-    // 退出专注模式
     exitFocusMode();
-    
-    // 停止背景音
     stopBackgroundSound();
-    
-    // 重置暂停状态
     isPaused = false;
 }
 
 // 显示通知
 function showNotification() {
+    saveFocusSession(totalSeconds);
+    renderFocusStats();
     notification.style.display = 'flex';
 }
 
@@ -153,7 +150,7 @@ function hideNotification() {
 function playBackgroundSound() {
     if (soundEnabled) {
         backgroundSound.volume = 0.7;
-        backgroundSound.play().catch(e => console.log('Audio play failed:', e));
+        backgroundSound.play().catch(e => {});
     }
 }
 
@@ -166,12 +163,9 @@ function stopBackgroundSound() {
 // 切换声音
 function toggleSound() {
     soundEnabled = !soundEnabled;
-    
     if (soundEnabled) {
         globalSoundToggle.innerHTML = '<i class="fa fa-volume-up"></i>';
-        if (countdownInterval && !isPaused) { // 如果正在倒计时且未暂停
-            playBackgroundSound();
-        }
+        if (countdownInterval && !isPaused) playBackgroundSound();
     } else {
         globalSoundToggle.innerHTML = '<i class="fa fa-volume-off"></i>';
         stopBackgroundSound();
@@ -183,23 +177,161 @@ startBtn.addEventListener('click', startCountdown);
 pauseBtn.addEventListener('click', pauseCountdown);
 resetBtn.addEventListener('click', resetCountdown);
 closeNotification.addEventListener('click', hideNotification);
-globalSoundToggle.addEventListener('click', toggleSound); // 绑定全局音量按钮
+globalSoundToggle.addEventListener('click', toggleSound);
 
 // 背景图片选择
 document.querySelectorAll('.image-option').forEach(option => {
     option.addEventListener('click', () => {
-        // 移除所有选中状态
         document.querySelectorAll('.image-option').forEach(opt => {
             opt.classList.remove('selected');
         });
-        
-        // 添加选中状态
         option.classList.add('selected');
-        
-        // 更改背景
         appBody.style.backgroundImage = `url(${option.dataset.bg})`;
     });
 });
 
 // 初始化
 updateDisplay();
+
+// 统计专注时长（账号隔离）
+function getStatsKey() {
+    return `focusStats_${currentAccount}`;
+}
+function saveFocusSession(seconds) {
+    const today = new Date().toISOString().slice(0,10);
+    let stats = JSON.parse(localStorage.getItem(getStatsKey()) || '{}');
+    stats[today] = (stats[today] || 0) + seconds;
+    localStorage.setItem(getStatsKey(), JSON.stringify(stats));
+}
+
+// 渲染统计（柱状图）
+function renderFocusStats() {
+    let stats = JSON.parse(localStorage.getItem(getStatsKey()) || '{}');
+    let labels = [];
+    let data = [];
+    for(let i=6;i>=0;i--) {
+        let d = new Date();
+        d.setDate(d.getDate()-i);
+        let key = d.toISOString().slice(0,10);
+        labels.push(key.slice(5));
+        data.push(Math.floor((stats[key]||0)/60));
+    }
+    if (chart) chart.destroy();
+    chart = new Chart(statsChartCanvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '专注分钟',
+                data: data,
+                backgroundColor: '#ffc038'
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true, precision:0 }
+            }
+        }
+    });
+}
+
+// 等待DOM完全加载后再执行
+document.addEventListener('DOMContentLoaded', function() {
+  // 获取DOM元素
+  const loginModal = document.getElementById('loginModal');
+  const registerModal = document.getElementById('registerModal');
+  const showRegisterBtn = document.getElementById('showRegisterBtn');
+  const cancelRegisterBtn = document.getElementById('cancelRegisterBtn');
+  const doRegisterBtn = document.getElementById('doRegisterBtn');
+  const loginBtn = document.getElementById('loginBtn');
+
+  // 检查元素是否存在
+  if (!loginModal || !registerModal || !showRegisterBtn || 
+      !cancelRegisterBtn || !doRegisterBtn || !loginBtn) {
+    console.error('无法找到所有必需的DOM元素');
+    return;
+  }
+
+  // 检查登录状态
+  function checkLogin() {
+    try {
+      const user = JSON.parse(localStorage.getItem('user_profile') || 'null');
+      if (!user) {
+        document.body.classList.add('login-active');
+        loginModal.style.display = 'flex';
+      } else {
+        document.body.classList.remove('login-active');
+        loginModal.style.display = 'none';
+      }
+    } catch (error) {
+      console.error('检查登录状态时出错:', error);
+      alert('无法验证登录状态，请刷新页面');
+    }
+  }
+  checkLogin();
+
+  // 登录
+  loginBtn.onclick = function() {
+    try {
+      const account = document.getElementById('loginAccount').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      if (!account || !password) {
+        alert('请输入账号和密码');
+        return;
+      }
+      let user = JSON.parse(localStorage.getItem('user_profile') || 'null');
+      if (!user || user.account !== account || user.password !== password) {
+        alert('账号或密码错误');
+        return;
+      }
+      localStorage.setItem('focus_current_account', account);
+      document.body.classList.remove('login-active');
+      loginModal.style.display = 'none';
+      location.reload();
+    } catch (error) {
+      console.error('登录时出错:', error);
+      alert('登录过程中发生错误');
+    }
+  };
+
+  // 显示注册弹窗
+  showRegisterBtn.onclick = function() {
+    loginModal.style.display = 'none';
+    document.body.classList.remove('login-active');
+    document.body.classList.add('register-active');
+    registerModal.style.display = 'flex';
+  };
+
+  // 取消注册
+  cancelRegisterBtn.onclick = function() {
+    registerModal.style.display = 'none';
+    document.body.classList.remove('register-active');
+    document.body.classList.add('login-active');
+    loginModal.style.display = 'flex';
+  };
+
+  // 注册
+  doRegisterBtn.onclick = function() {
+    try {
+      const account = document.getElementById('regAccount').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
+      const nickname = document.getElementById('regNickname').value.trim();
+      const birthday = document.getElementById('regBirthday').value;
+      if (!account || !password) {
+        alert('账号和密码必填');
+        return;
+      }
+      // 只允许注册一个账号（如需多账号可扩展为数组）
+      const user = { account, password, nickname, birthday };
+      localStorage.setItem('user_profile', JSON.stringify(user));
+      alert('注册成功，请登录');
+      registerModal.style.display = 'none';
+      document.body.classList.remove('register-active');
+      document.body.classList.add('login-active');
+      loginModal.style.display = 'flex';
+    } catch (error) {
+      console.error('注册时出错:', error);
+      alert('注册过程中发生错误');
+    }
+  };
+});

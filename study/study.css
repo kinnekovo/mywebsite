@@ -10,7 +10,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100; /* 确保在最上层 */
+  z-index: 100;
   transition: all 0.3s ease;
 }
 
@@ -42,6 +42,39 @@ nav li a:active {
   background-color: hsl(45, 74%, 52%);
 }
 
+/* 账号切换面板 */
+.account-panel {
+  margin: 70px auto 0 auto;
+  max-width: 600px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 8px;
+  padding: 10px 18px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+.account-panel input {
+  width: 120px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.account-panel button {
+  padding: 4px 12px;
+  font-size: 15px;
+  border-radius: 4px;
+  border: none;
+  background: #ffc038;
+  color: #fff;
+  cursor: pointer;
+}
+.account-panel #currentAccount {
+  margin-left: 10px;
+  color: #888;
+}
+
 /* 全局音量控制 */
 .global-sound-toggle {
   position: fixed;
@@ -56,7 +89,7 @@ nav li a:active {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 101; /* 比导航栏高一级 */
+  z-index: 101;
   transition: all 0.3s ease;
 }
 
@@ -161,7 +194,7 @@ button:disabled {
 }
 
 .sound-toggle {
-    display: none; /* 隐藏原来的音量按钮 */
+    display: none;
 }
 
 .image-gallery {
@@ -183,9 +216,12 @@ button:disabled {
     border-color: #4CAF50;
 }
 
+/* 修复背景预览图白边问题 */
 .image-option img {
     width: 100%;
-    height: 80px;
+    display: block;
+    border: none;
+    padding: 0;
     object-fit: cover;
 }
 
@@ -221,7 +257,8 @@ button:disabled {
 body.focus-mode .time-inputs,
 body.focus-mode #mainTitle,
 body.focus-mode #settingsPanel,
-body.focus-mode nav { /* 专注模式下隐藏导航栏 */
+body.focus-mode nav,
+body.focus-mode .account-panel { /* 专注模式下隐藏导航栏和账号面板 */
     display: none;
 }
 
@@ -234,13 +271,11 @@ body.focus-mode .container {
 body.focus-mode .time-display {
     font-size: clamp(3rem, 15vw, 7rem);
     color: white;
-    
-    /* 添加半透明背景 */
-    background-color: rgba(255, 255, 255, 0.2);  /* 半透明白色 */
-    backdrop-filter: blur(5px);  /* 毛玻璃效果 */
-    border-radius: 15px;  /* 圆角 */
-    padding: 10px 30px;  /* 内边距 */
-    display: inline-block;  /* 确保背景只覆盖内容区域 */
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 10px 30px;
+    display: inline-block;
 }
 
 body.focus-mode .buttons {
@@ -248,18 +283,17 @@ body.focus-mode .buttons {
 }
 
 body.focus-mode button {
-    /* 添加半透明背景 */
-    background-color: rgba(255, 255, 255, 0.2);  /* 半透明白色 */
-    backdrop-filter: blur(5px);  /* 毛玻璃效果 */
-    border-radius: 15px;  /* 圆角 */
-    padding: 10px 30px;  /* 内边距 */
-    display: inline-block;  /* 确保背景只覆盖内容区域 */
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 10px 30px;
+    display: inline-block;
     padding: 15px 30px;
     font-size: 1.2rem;
 }
 
 body.focus-mode .global-sound-toggle {
-    top: 30px; /* 专注模式下调整位置 */
+    top: 30px;
     right: 30px;
     transform: scale(1.2);
 }
@@ -279,5 +313,51 @@ body.focus-mode .global-sound-toggle {
 }
 
 body.focus-mode .footer {
-  display: none;       /* 专注模式下隐藏页脚 */
+  display: none;
+}
+
+.focus-stats {
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    margin: 30px 0 0 0;
+    padding: 18px 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
+.focus-stats h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+.focus-stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.focus-stats li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+body.focus-mode .focus-stats {
+  display: none;
+}
+
+/* 登录弹窗样式 */
+.login-modal {
+  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+.login-content {
+  background: #fff; padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 10px #3333;
+  display: flex; flex-direction: column; gap: 16px; min-width: 260px;
+}
+.login-content input { padding: 8px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+.login-content button { padding: 8px; font-size: 16px; border-radius: 5px; background: #ffc038; color: #fff; border: none; cursor: pointer; }
+
+/* 登录/注册时隐藏主内容 */
+body.login-active > *:not(.login-modal),
+body.register-active > *:not(.login-modal) {
+  display: none !important;
 }
