@@ -1,12 +1,12 @@
 // 整理数据（完整复制data.csv中所有条目，处理空值和日期格式）
 const rawData = [
-    { rank: "SSR", attribute: "共情", chapter: "挚爱篇", method: "「归心之所」活动女神之影", date: "2023.07.20" },
-    { rank: "SSR", attribute: "直觉", chapter: "挚爱篇", method: "「此春离离」活动女神之影", date: "2024.03.22" },
-    { rank: "SSR", attribute: "逻辑", chapter: "挚爱篇", method: "「愿予四季·冬雪篇」活动女神之影", date: "2025.02.20" }, // 移除[18]
-    { rank: "SSS", attribute: "逻辑", chapter: "旖慕篇", method: "常驻女神之影", date: "2020.07.30" },
-    { rank: "SSS", attribute: "共情", chapter: "旖慕篇", method: "无", date: "无" }, // 处理空值
+    { name:"拾光凝意",rank: "SSS", attribute: "共情", chapter: "挚爱篇", method: "「归心之所」活动女神之影", date: "2023.07.20" },
+    { name:"此春离离",rank: "SSS", attribute: "直觉", chapter: "挚爱篇", method: "「此春离离」活动女神之影", date: "2024.03.22" },
+    { name:"雪语时新",rank: "SSS", attribute: "逻辑", chapter: "挚爱篇", method: "「愿予四季·冬雪篇」活动女神之影", date: "2025.02.20" }, // 移除[18]
+    { name:"最佳拍档",rank: "SSR", attribute: "逻辑", chapter: "旖慕篇", method: "常驻女神之影", date: "2020.07.30" },
+    { name:"微醺视线",rank: "SSR", attribute: "共情", chapter: "旖慕篇", method: "无", date: "无" }, // 处理空值
     // ... 此处省略其他数据，需将csv中所有条目补充完整 ...
-    { rank: "R", attribute: "直觉", chapter: "异世篇", method: "活动「少年如你之心动魔咒」", date: "2025.04.30" }
+    { name:"妙信传音",rank: "R", attribute: "直觉", chapter: "异世篇", method: "活动「少年如你之心动魔咒」", date: "2025.04.30" }
 ];
 
 // 全局状态
@@ -39,6 +39,7 @@ function renderTable() {
     displayData.forEach(item => {
         const row = document.createElement("tr");
         row.innerHTML = `
+            <td>${item.name}</td>
             <td>${item.rank}</td>
             <td>${item.attribute}</td>
             <td>${item.chapter}</td>
@@ -59,8 +60,8 @@ function sortData(field) {
         sortDirection = "asc";
     }
 
-    // 等级排序权重（SSS > SSR > SR > MR > R）
-    const rankPriority = { SSS: 5, SSR: 4, SR: 3, MR: 2, R: 1 };
+    // 等级排序权重（SSS > SSR > MR > SR > R）
+    const rankPriority = { SSS: 5, SSR: 4, MR: 3, SR: 2, R: 1 };
 
     // 执行排序
     currentData.sort((a, b) => {
