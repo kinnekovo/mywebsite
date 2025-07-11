@@ -108,6 +108,7 @@ function filterData() {
         const matchAttr = !attribute || item.attribute === attribute;
         const matchChapter = !chapter || item.chapter === chapter;
         const matchSearch = !searchTerm || 
+            item.name.toLowerCase().includes(searchTerm) || // 添加对思绪名的搜索
             item.rank.toLowerCase().includes(searchTerm) ||
             item.attribute.toLowerCase().includes(searchTerm) ||
             item.chapter.toLowerCase().includes(searchTerm) ||
