@@ -8,7 +8,6 @@
 </head>
 
 <body>
-    <script src="info.js"></script>
     <!-- 导航栏 -->
     <ul>
         <li><a href="../index/index.html">首页</a></li>
@@ -86,6 +85,52 @@
                 </div>
             </div>
         </section>
+
+        <!-- 在.container内新增以下代码（建议放在基本信息section之后） -->
+        <section class="profile-section">
+            <h2>档案数据</h2>
+            <!-- 表格控制区：搜索、筛选、收起按钮 -->
+            <div class="table-controls">
+                <input type="text" id="searchInput" placeholder="搜索关键词..." class="search-box">
+                <select id="rankFilter" class="filter-select">
+                    <option value="">所有等级</option>
+                    <option value="SSR">SSR</option>
+                    <option value="SSS">SSS</option>
+                    <option value="SR">SR</option>
+                    <option value="MR">MR</option>
+                    <option value="R">R</option>
+                </select>
+                <select id="attributeFilter" class="filter-select">
+                    <option value="">所有属性</option>
+                    <option value="共情">共情</option>
+                    <option value="直觉">直觉</option>
+                    <option value="逻辑">逻辑</option>
+                </select>
+                <select id="chapterFilter" class="filter-select">
+                    <option value="">所有篇章</option>
+                    <option value="挚爱篇">挚爱篇</option>
+                    <option value="旖慕篇">旖慕篇</option>
+                    <option value="甜蜜篇">甜蜜篇</option>
+                    <option value="异世篇">异世篇</option>
+                    <option value="约定篇">约定篇</option>
+                    <option value="未定篇">未定篇</option>
+                </select>
+                <button id="toggleBtn" class="toggle-btn">展开</button>
+            </div>
+            <!-- 数据表格 -->
+            <table id="dataTable" class="data-table">
+                <thead>
+                    <tr>
+                        <th data-sort="rank">等级</th>
+                        <th data-sort="attribute">属性</th>
+                        <th data-sort="chapter">篇章</th>
+                        <th data-sort="method">获取方式</th>
+                        <th data-sort="date">上线时间</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </section>
     </div>
 
     <!-- 页脚 -->
@@ -93,4 +138,6 @@
         <p>© 2025 夏彦档案库 | 素材来源《未定事件簿》官方</p>
         <p>本网站仅用于粉丝交流，请勿用于商业用途</p>
     </footer>
+    <!-- 将脚本引入放在 body 结束标签之前 -->
+    <script src="info.js"></script>
 </body>

@@ -153,6 +153,101 @@ header h1 {
     color: #555;
 }
 
+/* 表格控制区样式 */
+.table-controls {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* 适配小屏幕 */
+    align-items: center;
+}
+
+.search-box {
+    padding: 8px 12px;
+    border: 2px solid #FFD166;
+    border-radius: 6px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 2px solid #FFD166;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.toggle-btn {
+    padding: 8px 16px;
+    background-color: #FFD166;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-btn:hover {
+    background-color: #FFB703;
+}
+
+/* 表格样式 */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.data-table th {
+    background-color: #FFD166;
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.data-table th:hover {
+    background-color: #FFB703;
+}
+
+/* 排序箭头指示 */
+.data-table th::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.data-table th.asc::after {
+    border-bottom: 5px solid white; /* 升序箭头 */
+}
+
+.data-table th.desc::after {
+    border-top: 5px solid white; /* 降序箭头 */
+}
+
+/* 交替行颜色 */
+.data-table tr:nth-child(even) {
+    background-color: #FFFDF6;
+}
+
+.data-table tr:hover {
+    background-color: #fff8e6;
+}
+
 /* 页脚 */
 .footer {
     width: 100%;
@@ -162,3 +257,4 @@ header h1 {
     background: #dddddd;
     margin-top: 20px;
 }
+
