@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们</title>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="about.css">
+</head>
+<body class="bg-white font-sans">
+    <ul>
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../info/info.html">心动档案</a></li>
+        <li><a href="../study/study.html">拾光凝意</a></li>
+        <li><a href="../game/game.html">迷抵少时</a></li>
+        <li><a href="../about/about.html">蜜秘</a></li>
+        <li><a href="../user/user.html">个人中心</a></li>
+    </ul>
+  <div class="container mx-auto px-4 py-16 max-w-5xl">
+    <!-- 正文内容 -->
+    <section class="mb-16">
+      <h1 class="text-4xl font-bold text-dark mb-6">关于我们</h1>
+      
+      <div class="prose max-w-none text-gray-medium space-y-6">
+        <p>创新科技成立于2010年，是一家专注于人工智能、大数据分析和云计算的高科技企业。十余年来，我们始终坚持以技术创新为核心，以客户需求为导向，不断突破自我，追求卓越。</p>
+        
+        <p>公司总部位于上海，目前已拥有500+员工，在全球设有8个分支机构，服务超过1000家企业客户，涵盖金融、医疗、教育、制造等多个领域。我们的技术解决方案帮助客户提升效率，降低成本，创造更多价值。</p>
+        
+        <h2 class="text-2xl font-bold text-dark mt-10 mb-4">我们的理念</h2>
+        <p>我们坚信技术的力量能够改变世界。通过持续创新和卓越服务，解决客户最具挑战性的问题，帮助他们实现业务增长和数字化转型，创造持久价值是我们不变的追求。</p>
+        
+        <p>客户至上、创新进取、诚信正直、合作共赢、追求卓越，这些价值观是我们一切行动的准则和基础，指引着公司的发展方向和核心价值。</p>
+      </div>
+    </section>
+
+    <!-- 用户反馈表单 -->
+    <section id="feedback" class="bg-light rounded-2xl p-8 shadow-sm">
+      <h2 class="text-2xl font-bold text-dark mb-6">您的反馈对我们很重要</h2>
+      <p class="text-gray-medium mb-8">请告诉我们您的想法、建议或问题，我们会认真对待每一条反馈</p>
+      
+      <form id="feedbackForm" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-dark mb-2">姓名 <span class="text-red-500">*</span></label>
+            <input type="text" id="name" name="name" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-custom outline-none"
+                  placeholder="请输入您的姓名">
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-medium text-dark mb-2">邮箱 <span class="text-red-500">*</span></label>
+            <input type="email" id="email" name="email" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-custom outline-none"
+                  placeholder="请输入您的邮箱">
+          </div>
+        </div>
+        
+        <div>
+          <label for="feedbackType" class="block text-sm font-medium text-dark mb-2">反馈类型 <span class="text-red-500">*</span></label>
+          <select id="feedbackType" name="feedbackType" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-custom outline-none appearance-none bg-white"
+                            style="background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width=&#34;20&#34; height=&#34;20&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;><path d=&#34;M7 10l5 5 5-5z&#34; fill=&#34;%2386909C&#34;/></svg>'); background-repeat: no-repeat; background-position: right 12px center;">
+            <option value="" disabled selected>请选择反馈类型</option>
+            <option value="suggestion">问题反馈</option>
+            <option value="praise">改进建议</option>
+            <option value="complaint">加入我们</option>
+            <option value="question">夸夸</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="message" class="block text-sm font-medium text-dark mb-2">反馈内容 <span class="text-red-500">*</span></label>
+          <textarea id="message" name="message" rows="5" required
+                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-custom outline-none resize-none"
+                   placeholder="请详细描述您的反馈内容"></textarea>
+        </div>
+        
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input id="agreement" name="agreement" type="checkbox" required
+                  class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+          </div>
+          <label for="agreement" class="ml-3 text-sm text-gray-medium">
+            我同意创新科技根据<a href="#" class="text-primary hover:underline">隐私政策</a>处理我的个人信息
+          </label>
+        </div>
+        
+        <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-custom shadow-md shadow-primary/20">
+          提交反馈
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <script src="about.js"></script>
+</body>
+</html>

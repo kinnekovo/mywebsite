@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片浏览</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <ul class="nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../info/info.html">心动档案</a></li>
+        <li><a href="../study/study.html">拾光凝意</a></li>
+        <li><a href="../game/game.html">迷抵少时</a></li>
+        <li><a href="../about/about.html">蜜秘</a></li>
+        <li><a href="../user/user.html">个人中心</a></li>
+    </ul>
+
+    <div class="container">
+        <div class="image-gallery">
+            <!-- 左侧预览图 -->
+            <div class="image-container side-img" id="prev-img-container" onclick="prevImage()">
+                <img id="prev-img" src="" alt="上一张图片" class="img">
+            </div>
+            
+            <!-- 主图 -->
+            <div class="image-container main-img-container" id="main-img-container">
+                <img id="main-img" src="" alt="当前图片" class="img">
+                <div class="img-info">
+                    <h3 id="image-title"></h3>
+                    <p id="image-desc"></p>
+                </div>
+            </div>
+            
+            <!-- 右侧预览图 -->
+            <div class="image-container side-img" id="next-img-container" onclick="nextImage()">
+                <img id="next-img" src="" alt="下一张图片" class="img">
+            </div>
+        </div>
+        
+        <!-- 导航按钮 -->
+        <div class="button-group">
+            <button class="btn-nav" onclick="prevImage()">
+                <i class="fa fa-arrow-left mr-2"></i>上一个
+            </button>
+            <button class="btn-nav" onclick="goToUrl()">
+                前往
+            </button>
+            <button class="btn-nav" onclick="nextImage()">
+                下一个<i class="fa fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>© 2025 夏彦档案库 | 素材来源《未定事件簿》官方</p>
+        <p>本网站仅用于粉丝交流，请勿用于商业用途</p>
+    </footer>
+</body>
+</html>
