@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .card { position: relative; width: 200px; }
+    .video-popup {
+      display: none;
+      position: absolute;
+      bottom: -250px;
+      left: 0;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      z-index: 1000;
+    }
+    .card:hover .video-popup { display: block; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://picsum.photos/200/300" alt="Card Image">
+    <h3>卡片标题</h3>
+    <div class="video-popup">
+      <video width="320" height="240" controls>
+        <source src="image/心动档案.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+    </div>
+  </div>
+</body>
+</html>

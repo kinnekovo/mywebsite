@@ -46,7 +46,7 @@ li a:active {
 }
 
 body {
-    background-image: url("image/bg.jpg");
+    background-image: url("../image/bg.jpg");
     background-repeat: no-repeat;
     background-position: left;
     background-attachment: fixed;
