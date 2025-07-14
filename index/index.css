@@ -101,7 +101,7 @@ li a:active {
 
 /* 单个卡片样式 */
 .card {
-  width: 220px; /* 卡片宽度，可根据需求调整 */
+  width: 260px; /* 卡片宽度，可根据需求调整 */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -116,18 +116,28 @@ li a:active {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* 卡片图片容器样式 */
-.card-img {
+/* 卡片媒体容器样式 */
+.card-media {
   width: 100%;
   height: 200px; /* 固定图片容器高度，让图片展示更整齐 */
   overflow: hidden;
+  position: relative;
 }
 
 /* 卡片图片样式，保持比例并覆盖容器 */
-.card-img img {
+.card-img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* 保持图片比例，裁剪多余部分 */
+  display: block;
+}
+
+/* 卡片视频样式，默认隐藏 */
+.card-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
 }
 
 /* 卡片标题样式 */
