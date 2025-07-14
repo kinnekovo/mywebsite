@@ -257,6 +257,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     checkLogin();
 
+    // 渲染统计图表
+    renderFocusStats();
+
     // 登录
     loginBtn.onclick = function() {
         try {

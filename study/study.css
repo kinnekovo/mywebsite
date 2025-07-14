@@ -44,7 +44,7 @@ nav li a:active {
 
 /* 非专注模式下显示当前账号 */
 #currentAccount {
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 60px;
     color: white;
