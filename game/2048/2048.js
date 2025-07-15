@@ -21,8 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let emptyCells = cells.filter(cell => cell.innerText === '');
         if (emptyCells.length === 0) return;
         let randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-        randomCell.innerText = Math.random() > 0.1 ? 2 : 4;
-        randomCell.classList.add(`cell-${randomCell.innerText}`);
+        const number = Math.random() > 0.1 ? 2 : 4;
+        randomCell.innerText = number;
+        randomCell.classList.add(`cell-${number}`);
     }
 
     function move(direction) {
@@ -41,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cells[index].innerText !== newRowOrCol[j].innerText) hasMoved = true;
                 cells[index].innerText = newRowOrCol[j].innerText;
                 cells[index].className = 'cell';
-                if (cells[index].innerText !== '') cells[index].classList.add(`cell-${cells[index].innerText}`);
+                if (newRowOrCol[j].innerText !== '') {
+                    cells[index].classList.add(`cell-${newRowOrCol[j].innerText}`);
+                }
             }
         }
         if (hasMoved) {
